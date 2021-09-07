@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "@/styles/Home.module.css";
-import { auth } from "firebase";
-import { Button, Code, Heading, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import { Box, Button, Code, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { useAuth } from "@/lib/auth";
+import DashboardShell from "@/components/DashboardShell";
+import { LogoIcon } from "@/styles/Icons/LogoIcon";
 
 export default function Home() {
   const auth = useAuth();
@@ -17,41 +17,29 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <Flex
+      as="main"
+      direction="column"
+      align="center"
+      justify="center"
+      h="100vh"
+    >
       <Head>
         <title>Komenin - Home</title>
       </Head>
-      <main>
-        <Heading isTruncated>Komenin</Heading>
-        {!auth?.user && (
-          <Button colorScheme="blue" onClick={handleSignIn}>
-            Sign In
-          </Button>
-        )}
-        <div>{auth?.user?.email}</div>
-        {auth?.user && (
-          <Button colorScheme="red" onClick={handleSignOut}>
-            Sign Out
-          </Button>
-        )}
-
-        <Text>
-          <Code>Current User: {auth?.user?.name}</Code>
-        </Text>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+      <LogoIcon color="black" w={32} h={32} />
+      <Heading isTruncated>Komenin</Heading>
+      {auth?.user ? (
+        <Button mt={4} size="sm">
+          <Link href="/dashboard">
+            <a>Buka Dashboard</a>
+          </Link>
+        </Button>
+      ) : (
+        <Button variant="ghost" size="sm" mt={4} onClick={handleSignIn}>
+          Masuk
+        </Button>
+      )}
+    </Flex>
   );
 }
