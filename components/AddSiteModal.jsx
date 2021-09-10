@@ -49,7 +49,7 @@ export const AddSiteModal = ({ children, ...pageProps }) => {
 
     const newSite = {
       authorId: auth.user.uid,
-      createdAt: new Date().toUTCString(),
+      createdAt: new Date().toISOString(),
       ...moddedData,
     };
 
@@ -107,7 +107,9 @@ export const AddSiteModal = ({ children, ...pageProps }) => {
                 errors={errors}
                 name="namasitus"
                 render={({ message }) => (
-                  <Text color="red.600">⚠️ {message}</Text>
+                  <Text color="red.600" fontSize="s" mt={1}>
+                    ⚠️ {message}
+                  </Text>
                 )}
               />
             </FormControl>
@@ -125,7 +127,9 @@ export const AddSiteModal = ({ children, ...pageProps }) => {
                 errors={errors}
                 name="linksitus"
                 render={({ message }) => (
-                  <Text color="red.600">⚠️ {message}</Text>
+                  <Text color="red.600" fontSize="s" mt={1}>
+                    ⚠️ {message}
+                  </Text>
                 )}
               />
             </FormControl>
