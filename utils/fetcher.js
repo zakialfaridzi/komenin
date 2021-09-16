@@ -1,5 +1,9 @@
-import axios from "axios";
+export default async (url, token) => {
+  const res = await fetch(url, {
+    method: "GET",
+    headers: new Headers({ "Content-Type": "application/json", token }),
+    credentials: "same-origin",
+  });
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
-
-export default fetcher;
+  return res.json();
+};

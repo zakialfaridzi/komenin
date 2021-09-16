@@ -5,20 +5,20 @@ import DashboardShell from "@/components/DashboardShell";
 import { useAuth } from "@/lib/auth";
 import fetcher from "utils/fetcher";
 import Error from "@/components/Error";
-import SiteTable from "@/components/SiteTable";
-import SiteTableHeader from "@/components/SiteTableHeader";
+import FeedbackTable from "@/components/FeedbackTable";
+import FeedbackTableHeader from "@/components/FeedbackTableHeader";
 
-export default function Dashboard() {
+export default function Feedback() {
   const auth = useAuth();
   const { data, error } = useSWR(
-    auth.user ? ["/api/sites", auth.user.token] : null,
+    auth.user ? ["/api/feedback", auth.user.token] : null,
     fetcher
   );
 
   if (!data) {
     return (
       <DashboardShell>
-        <SiteTableHeader />
+        <FeedbackTableHeader />
         <SiteTableSkeleton />
       </DashboardShell>
     );
@@ -28,8 +28,12 @@ export default function Dashboard() {
 
   return (
     <DashboardShell>
-      <SiteTableHeader />
-      {data.sites ? <SiteTable sites={data.sites} /> : <EmptyState />}
+      <FeedbackTableHeader />
+      {data.feedback ? (
+        <FeedbackTable allFeedback={data.feedback} />
+      ) : (
+        <EmptyState />
+      )}
     </DashboardShell>
   );
 }
