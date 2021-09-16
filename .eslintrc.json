@@ -1,4 +1,7 @@
 {
   "extends": "next/core-web-vitals",
-  "rules": { "react/no-children-prop": "off" }
+  "rules": {
+    "react/no-children-prop": "off",
+    "import/no-anonymous-default-export": "off"
+  }
 }

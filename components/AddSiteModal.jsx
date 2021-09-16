@@ -66,10 +66,8 @@ export const AddSiteModal = ({ children, ...pageProps }) => {
 
     reset();
     mutate(
-      "/api/sites",
+      ["/api/sites", auth.user.token],
       async (data) => {
-        console.log("🚀 ~ file: AddSiteModal.jsx ~ line 71 ~ data", data);
-        console.log({ sites: [...data.sites, newSite] });
         return { sites: [...data.sites, newSite] };
       },
       false
